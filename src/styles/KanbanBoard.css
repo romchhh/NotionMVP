@@ -1,0 +1,121 @@
+.kanban-container {
+  min-height: 100vh;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.kanban-main {
+  flex-grow: 1;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.kanban-content {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.kanban-stats {
+  width: 300px;
+  padding: 24px;
+  border-left: 1px solid;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.kanban-columns {
+  height: 100%;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+  display: flex;
+  gap: 24px;
+}
+
+.kanban-column {
+  flex: 1;
+  min-width: 300px;
+  height: fit-content;
+  min-height: 500px !important;
+  padding: 0 !important;
+}
+
+.kanban-column > div {
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column > div > div[role="list"] {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 400px;
+  padding: 8px;
+}
+
+.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.light {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.dark .kanban-stats {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.light .kanban-stats {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.stats-card {
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.dark .stats-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light .stats-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stats-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.stats-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stats-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.dark .progress-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.light .progress-bar {
+  background-color: rgba(0, 0, 0, 0.05);
+} 
