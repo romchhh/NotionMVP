@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "b5e7b3d8-4f2a-4e3c-9b2d-8f2e9b5a7c1d",
+		"name": "Kanban Board GraphQL API",
+		"description": "Колекція GraphQL запитів для Kanban Board API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Queries",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query GetAllTasks { tasks { _id title description status priority tags assignee dueDate checklist { text completed } createdAt updatedAt } }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Отримати всі задачі"
+					}
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query GetTask($id: ID!) { task(id: $id) { _id title description status priority tags assignee dueDate checklist { text completed } createdAt updatedAt } }\",\n  \"variables\": {\n    \"id\": \"your_task_id_here\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Отримати задачу за ID"
+					}
+				},
+				{
+					"name": "Get Tasks by Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query GetTasksByStatus($status: String!) { tasksByStatus(status: $status) { _id title description status priority assignee checklist { text completed } } }\",\n  \"variables\": {\n    \"status\": \"todo\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Отримати задачі за статусом"
+					}
+				}
+			]
+		},
+		{
+			"name": "Mutations",
+			"item": [
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation CreateTask($input: TaskInput!) { createTask(input: $input) { _id title description status priority tags assignee dueDate checklist { text completed } } }\",\n  \"variables\": {\n    \"input\": {\n      \"title\": \"Нова задача\",\n      \"description\": \"Опис нової задачі\",\n      \"status\": \"todo\",\n      \"priority\": \"high\",\n      \"tags\": [\"важливе\", \"термінове\"],\n      \"assignee\": \"Іван\",\n      \"dueDate\": \"2024-03-25\",\n      \"checklist\": [\n        {\n          \"text\": \"Підзадача 1\",\n          \"completed\": false\n        }\n      ]\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Створити нову задачу"
+					}
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation UpdateTask($id: ID!, $input: TaskInput!) { updateTask(id: $id, input: $input) { _id title description status priority tags assignee dueDate checklist { text completed } updatedAt } }\",\n  \"variables\": {\n    \"id\": \"your_task_id_here\",\n    \"input\": {\n      \"title\": \"Оновлена задача\",\n      \"description\": \"Оновлений опис задачі\",\n      \"status\": \"in-progress\",\n      \"priority\": \"medium\",\n      \"tags\": [\"оновлено\"],\n      \"assignee\": \"Петро\",\n      \"dueDate\": \"2024-03-30\",\n      \"checklist\": [\n        {\n          \"text\": \"Оновлена підзадача\",\n          \"completed\": true\n        }\n      ]\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Оновити існуючу задачу"
+					}
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation DeleteTask($id: ID!) { deleteTask(id: $id) { _id title } }\",\n  \"variables\": {\n    \"id\": \"your_task_id_here\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Видалити задачу"
+					}
+				},
+				{
+					"name": "Update Task Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation UpdateTaskStatus($id: ID!, $status: String!) { updateTaskStatus(id: $id, status: $status) { _id title status updatedAt } }\",\n  \"variables\": {\n    \"id\": \"your_task_id_here\",\n    \"status\": \"done\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Оновити статус задачі"
+					}
+				}
+			]
+		},
+		{
+			"name": "Complex Queries",
+			"item": [
+				{
+					"name": "Get Tasks with Filters",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query GetTasksWithFilters($status: String, $priority: String) { tasks { _id title status priority assignee dueDate checklist { text completed } } }\",\n  \"variables\": {\n    \"status\": \"in-progress\",\n    \"priority\": \"high\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Отримати задачі з фільтрами"
+					}
+				},
+				{
+					"name": "Get Tasks Statistics",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query GetTasksStats { tasks { status priority } }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5001",
+							"path": ["graphql"]
+						},
+						"description": "Отримати статистику задач"
+					}
+				}
+			]
+		}
+	]
+} 
